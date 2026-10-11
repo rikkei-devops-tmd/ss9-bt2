@@ -11,7 +11,7 @@ BAI 2: KHOI CHAY WEB SERVER NGINX VOI PORT MAPPING
 - Port mapping: 8080 (host) : 80 (container).
 - Kiem tra ket qua bang curl.
 
-3. CAC BUOC THUC HIEN
+3. CAC BUOC THUC HIEN VA KET QUA TERMINAL THUC TE
 
 3.1. Khoi chay Nginx Web Server o che do chay ngam
 Lenh thuc hien:
@@ -20,14 +20,7 @@ docker run -d -p 8080:80 --name my-web nginx:alpine
 ```
 Ket qua dau ra:
 ```text
-Unable to find image 'nginx:alpine' locally
-alpine: Pulling from library/nginx
-da9db072f522: Pull complete
-84bbfde714f3: Pull complete
-88f4b097b6cf: Pull complete
-Digest: sha256:7f4c39b1a5be7164998e3b3fb349e5d4be108fb29df713f3608137397793d56a
-Status: Downloaded newer image for nginx:alpine
-5f8b3c1a2d4e6f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a
+c9f9f29bc31146fc8115e788a327717ab2b682a0d75307aa8669ff01e37eff8b
 ```
 
 3.2. Kiem tra danh sach container dang chay
@@ -37,14 +30,14 @@ docker ps
 ```
 Ket qua dau ra:
 ```text
-CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                  NAMES
-5f8b3c1a2d4e   nginx:alpine   "/docker-entrypoint.…"   5 seconds ago   Up 4 seconds   0.0.0.0:8080->80/tcp   my-web
+CONTAINER ID   IMAGE          COMMAND                  CREATED                  STATUS                  PORTS                                     NAMES
+c9f9f29bc311   nginx:alpine   "/docker-entrypoint.…"   Less than a second ago   Up Less than a second   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
 ```
 
 3.3. Gui truy van kiem tra phan hoi Web Server
 Lenh thuc hien:
 ```bash
-curl http://localhost:8080
+curl -s http://localhost:8080
 ```
 Ket qua dau ra:
 ```text
@@ -60,13 +53,17 @@ font-family: Tahoma, Verdana, Arial, sans-serif; }
 </head>
 <body>
 <h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
 
 <p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
 
 <p><em>Thank you for using nginx.</em></p>
 </body>
@@ -89,13 +86,13 @@ Lenh thuc hien:
 ```bash
 docker ps -a
 ```
-Ket qua: Container my-web khong con xuat hien trong danh sach container.
+Ket qua: Container my-web da duoc dung va xoa hoan toan khoi he thong.
 
 4. TONG KET CAC LENH
 ```bash
 docker run -d -p 8080:80 --name my-web nginx:alpine
 docker ps
-curl http://localhost:8080
+curl -s http://localhost:8080
 docker stop my-web && docker rm my-web
 docker ps -a
 ```
